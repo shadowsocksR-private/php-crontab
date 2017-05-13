@@ -14,4 +14,4 @@ RUN apt-get update -y && \
     apt-get remove --purge -y curl build-essential && apt-get autoclean && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
-CMD "cron && bash"
+CMD cron && tail -f /var/log/syslog
