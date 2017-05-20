@@ -8,7 +8,7 @@ RUN apt-get update -y && \
     mkdir /var/www && cd /var/www && git clone https://github.com/glzjin/ss-panel-v3-mod.git tmp -b new_master && mv tmp/.git . && rm -rf tmp && git reset --hard && \
     cd /var/www &&  php composer.phar install && \
     crontab -l | { cat; echo "30 22 * * * php /var/www/xcat sendDiaryMail"; } | crontab - && \
-    crontab -l | { cat; echo "0 0 * * * php -n /var/www/xcat dailyjob"; } | crontab - && \
+    crontab -l | { cat; echo "0 0 * * * php /var/www/xcat dailyjob"; } | crontab - && \
     crontab -l | { cat; echo "*/1 * * * * php /var/www/xcat syncvpn"; } | crontab - && \
     crontab -l | { cat; echo "*/1 * * * * php /var/www/xcat checkjob"; } | crontab - && \
     apt-get remove --purge -y curl build-essential && apt-get autoclean && apt-get clean && \
