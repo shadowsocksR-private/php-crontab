@@ -11,7 +11,8 @@ RUN apt-get update -y && \
     crontab -l | { cat; echo "0 0 * * * php /var/www/xcat dailyjob"; } | crontab - && \
     crontab -l | { cat; echo "*/1 * * * * php /var/www/xcat syncvpn"; } | crontab - && \
     crontab -l | { cat; echo "*/1 * * * * php /var/www/xcat checkjob"; } | crontab - && \
+    touch /var/log/cron.log && \
     apt-get remove --purge -y curl build-essential && apt-get autoclean && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
-CMD cron && tail -f /dev/null
+CMD cron && tail -f /var/log/cron.log
