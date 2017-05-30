@@ -8,7 +8,7 @@ RUN yum install cronie -y && \
     crontab -l | { cat; echo "*/1 * * * * php /data/www/xcat syncvpn"; } | crontab - && \
     crontab -l | { cat; echo "*/1 * * * * php /data/www/xcat checkjob"; } | crontab - && \
     touch /var/log/cron.log && \
-    apt-get remove --purge -y curl build-essential && apt-get autoclean && apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    yum clean all -y && \
+    rm -rf /tmp/* /var/tmp/*
     
 CMD crond && tail -f /var/log/cron.log
