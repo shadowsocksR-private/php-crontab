@@ -9,5 +9,8 @@ RUN yum install cronie -y && \
     crontab -l | { cat; echo "*/1 * * * * /usr/local/php/bin/php /data/www/xcat checkjob"; } | crontab - && \
     touch /var/log/cron.log && \
     yum clean all -y && \
-    rm -rf /tmp/* /var/tmp/*
-    echo "crond" >> /start.sh
+    rm -rf /tmp/* /var/tmp/* && \
+    echo "#!/bin/sh" > /start.sh && \
+    echo "set -e" >> /start.sh && \
+    echo "crond" >> /start.sh  && \
+    echo "/usr/bin/supervisord -n -c /etc/supervisord.conf" >> /start.sh
