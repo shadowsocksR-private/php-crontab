@@ -10,5 +10,4 @@ RUN yum install cronie -y && \
     touch /var/log/cron.log && \
     yum clean all -y && \
     rm -rf /tmp/* /var/tmp/*
-    
-CMD crond && tail -f /var/log/cron.log
+    echo "crond" >> /start.sh
